@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Greetings from './Greetings';
+import Counter from './Counter';
 
 function App() {
   const onClick = (name: string) => {
@@ -8,7 +9,11 @@ function App() {
     
   };
   return (
-    <Greetings name="JHP" onClick={onClick}/>
+    <div>
+      <Greetings name="JHP" onClick={onClick}/>
+      <Counter />
+    </div>
+    
   );
 }
 
