@@ -28,3 +28,21 @@ type TodosDispatch = Dispatch<Action>;
 // 예) 액션에 추가적으로 필요한 text나 id 가 빠지면 오류를 발생
 const TodosDispatchContext = createContext<TodosDispatch | undefined>(undefined);
 
+// 리듀서 작성
+function todosReducer(state: TodosState, action: Action): TodosState {
+    switch (action.type) {
+        case 'CREATE':
+            const nextId = Math.max(...state.map( todo => todo.id)) + 1;
+            return state.concat({
+                id: nextId,
+                text: action.text,
+                done: false
+            });
+        case 'TOGGLE':
+            return state.map(todo => todo.id === action.id ? {...todo, done: !todo.done} : todo);
+        case 'REMOVE':
+            return state.filter(todo => todo.id !== action.id);
+        default:
+            throw new Error('Unhandled action');
+    }
+}
