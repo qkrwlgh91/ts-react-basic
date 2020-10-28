@@ -1,5 +1,5 @@
 // 상태 전용 Context
-import { createContext } from 'react';
+import { createContext, Dispatch } from 'react';
 
 // 다른 컴포넌트에서 타입을 불러와서 쓸 수 있도록 export
 export type Todo = {
@@ -21,4 +21,10 @@ type Action =
     | { type: 'CREATE'; text: string }
     | { type: 'TOGGLE'; id: number }
     | { type: 'REMOVE'; id: number };
+
+type TodosDispatch = Dispatch<Action>;
+
+// Generics으로 액션들의 타입을 넣어주면 추 후 컴포넌트에서 랙션을 디스패치 할 때 액션들에 대한 타입을 검사할 수 있다.
+// 예) 액션에 추가적으로 필요한 text나 id 가 빠지면 오류를 발생
+const TodosDispatchContext = createContext<TodosDispatch | undefined>(undefined);
 
