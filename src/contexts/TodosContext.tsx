@@ -1,5 +1,5 @@
 // 상태 전용 Context
-import { createContext, Dispatch } from 'react';
+import React, { createContext, Dispatch, useReducer } from 'react';
 
 // 다른 컴포넌트에서 타입을 불러와서 쓸 수 있도록 export
 export type Todo = {
@@ -45,4 +45,34 @@ function todosReducer(state: TodosState, action: Action): TodosState {
         default:
             throw new Error('Unhandled action');
     }
+}
+
+// provider 작성
+// App에서 불러와 사용해야 하므로 export!!
+export function TodosContextProvider({ children }: { children: React.ReactNode } ) {
+    const [todos, dispatch] = useReducer(todosReducer, [
+        {
+            id: 1,
+            text: 'Context API 배우기',
+            done: true
+        },
+        {
+            id: 2,
+            text: 'Typescript 배우기',
+            done: true
+        },
+        {
+            id: 3,
+            text: 'TypeScript 와 Context API 함께 사용하기',
+            done: false
+        },
+    ]);
+
+    return (
+        <TodosDispatchContext.Provider value={dispatch}>
+            <TodosStateContext.Provider value={todos}>
+                {children}
+            </TodosStateContext.Provider>
+        </TodosDispatchContext.Provider>
+    );
 }
