@@ -8,6 +8,7 @@ import ReducerSample from './ReducerSample';
 
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
+import { TodosContextProvider} from './contexts/TodosContext';
 
 function App() {
   const onClick = (name: string) => {
@@ -27,8 +28,11 @@ function App() {
       <CounterReducer />
       <ReducerSample />
       <div>
-        <TodoForm/>
-        <TodoList/>
+        <hr/>
+        <TodosContextProvider>
+          <TodoForm/>
+          <TodoList/>
+        </TodosContextProvider>
       </div>
     </div>
     

@@ -1,8 +1,9 @@
 import React from 'react'
 import TodoItem from './TodoItem';
+import { useTodosState } from '../contexts/TodosContext';
 
 function TodoList() {
-
+/*
     const todos = [
         {
             id: 1,
@@ -20,6 +21,11 @@ function TodoList() {
             done: false
         },
     ]
+*/
+
+    // Context안의 상태를 조회하여 렌더링
+    // 커스텀 Hook을 만뜰 었기 때문에 간단히 처리 할 수 있는 장점이 있다.
+    const todos = useTodosState();
 
     return (
         <ul>
